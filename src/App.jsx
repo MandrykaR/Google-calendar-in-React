@@ -6,7 +6,6 @@ import './common.scss'
 
 const App = () => {
 	const [weekStartDate, setWeekStartDate] = useState(new Date())
-	const [currentWeek, setCurrentWeek] = useState()
 
 	const handlePrevWeek = () => {
 		setWeekStartDate(
@@ -22,11 +21,19 @@ const App = () => {
 		)
 	}
 
+	const handleCurrentWeek = () => {
+		setWeekStartDate(new Date())
+	}
+
 	const weekDates = generateWeekRange(getWeekStartDate(weekStartDate))
 
 	return (
 		<>
-			<Header onPrevWeek={handlePrevWeek} onNextWeek={handleNextWeek} />
+			<Header
+				onPrevWeek={handlePrevWeek}
+				onNextWeek={handleNextWeek}
+				onCurrentWeek={handleCurrentWeek}
+			/>
 			<Calendar weekDates={weekDates} />
 		</>
 	)
