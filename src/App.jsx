@@ -1,27 +1,36 @@
-import React, { Component } from 'react';
-import Header from './components/header/Header.jsx';
-import Calendar from './components/calendar/Calendar.jsx';
+import React, { useState } from 'react'
+import Header from './components/header/Header.jsx'
+import Calendar from './components/calendar/Calendar.jsx'
 
-import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
+import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js'
 
-import './common.scss';
+import './common.scss'
 
-class App extends Component {
-  state = {
-    weekStartDate: new Date(),
-  };
+const App = () => {
+	const [weekStartDate, setWeekStartDate] = useState(new Date())
 
-  render() {
-    const { weekStartDate } = this.state;
-    const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+	const handlePrevWeek = () => {
+		setWeekStartDate(
+			prevStateDate =>
+				new Date(prevStateDate.getTime() - 7 * 24 * 60 * 60 * 1000)
+		)
+	}
 
-    return (
-      <>
-        <Header />
-        <Calendar weekDates={weekDates} />
-      </>
-    );
-  }
+	const handleNextWeek = () => {
+		setWeekStartDate(
+			prevStateDate =>
+				new Date(prevStateDate.getTime() + 7 * 24 * 60 * 60 * 1000)
+		)
+	}
+
+	const weekDates = generateWeekRange(getWeekStartDate(weekStartDate))
+
+	return (
+		<>
+			<Header onPrevWeek={handlePrevWeek} onNextWeek={handleNextWeek} />
+			<Calendar weekDates={weekDates} />
+		</>
+	)
 }
 
-export default App;
+export default App

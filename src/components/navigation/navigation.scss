@@ -1,17 +1,24 @@
 .calendar {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px);
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 60px);
 
-  &__header {
-    display: flex;
-    height: 100px;
-    padding-left: 48px;
-  }
+	&__header {
+		display: flex;
+		height: 100px;
+		padding-left: 48px;
+	}
 
-  &__day {
-    position: relative;
-    flex: 1;
-    border-left: 1px solid #eee;
-  }
+	&__day {
+		position: relative;
+		flex: 1;
+		border-left: 1px solid #eee;
+	}
+	.current-day {
+		opacity: 1;
+		background-color: blue;
+		border-radius: 50%;
+		padding: 7px 15px;
+		color: #fff;
+	}
 }
