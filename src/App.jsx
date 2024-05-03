@@ -6,7 +6,7 @@ import './common.scss'
 
 const App = () => {
 	const [weekStartDate, setWeekStartDate] = useState(new Date())
-  
+	const [currentWeek, setCurrentWeek] = useState()
 
 	const handlePrevWeek = () => {
 		setWeekStartDate(
