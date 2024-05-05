@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import Header from './components/header/Header.jsx'
 import Calendar from './components/calendar/Calendar.jsx'
+
 import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js'
+import { months } from '../src/utils/dateUtils.js'
+
 import './common.scss'
 
 const App = () => {
@@ -26,6 +29,11 @@ const App = () => {
 	}
 
 	const weekDates = generateWeekRange(getWeekStartDate(weekStartDate))
+	const startMouth = months[weekDates[0].getMonth()]
+	const endMouth = months[weekDates[weekDates.length - 1].getMonth()]
+
+	const navTextMouth =
+		startMouth === endMouth ? startMouth : `${startMouth} - ${endMouth}`
 
 	return (
 		<>
@@ -33,6 +41,7 @@ const App = () => {
 				onPrevWeek={handlePrevWeek}
 				onNextWeek={handleNextWeek}
 				onCurrentWeek={handleCurrentWeek}
+				navTextMouth={navTextMouth}
 			/>
 			<Calendar weekDates={weekDates} />
 		</>

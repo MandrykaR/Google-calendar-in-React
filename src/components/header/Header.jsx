@@ -2,7 +2,13 @@ import React from 'react'
 
 import './header.scss'
 
-const Header = ({ onPrevWeek, onNextWeek, onCurrentWeek }) => {
+const Header = ({
+	onPrevWeek,
+	onNextWeek,
+	onCurrentWeek,
+
+	navTextMouth,
+}) => {
 	return (
 		<header className='header'>
 			<button className='button create-event-btn'>
@@ -21,7 +27,7 @@ const Header = ({ onPrevWeek, onNextWeek, onCurrentWeek }) => {
 				<button className='icon-button navigation__nav-icon'>
 					<i className='fas fa-chevron-right' onClick={onNextWeek}></i>
 				</button>
-				<span className='navigation__displayed-month'></span>
+				<span className='navigation__displayed-month'>{navTextMouth}</span>
 			</div>
 		</header>
 	)
