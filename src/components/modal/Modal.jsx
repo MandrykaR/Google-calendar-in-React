@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 
 import './modal.scss'
 
-const Modal = ({ onClose }) => {
+const Modal = ({ onEventCreate, onClose }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
 		date: '',
-		startTime: '',
-		endTime: '',
+		dateFrom: '',
+		dateTo: '',
 	})
-
 
 	const handleChange = e => {
 		const { name, value } = e.target
@@ -21,23 +19,32 @@ const Modal = ({ onClose }) => {
 		})
 	}
 
-	const handleSubmit = async e => {
+	const handleSubmit = e => {
 		e.preventDefault()
 
-		try {
-			const res = await axios.post(
-				'https://658d94da7c48dce9473970f5.mockapi.io/tasks',
-				formData
-			)
+		const eventDateSplit = formData.date.split('-')
+		const eventDateFrom = formData.dateFrom.split(':')
+		const eventDateTo = formData.dateTo.split(':')
 
-			if (res.status === 201) {
-				res.data
-			} else {
-				console.log(res.status)
-			}
-		} catch (error) {
-			console.log(error)
+		const hourFrom = Number(eventDateFrom[0])
+		const minuteFrom = Number(eventDateFrom[1])
+
+		const hourTo = Number(eventDateTo[0])
+		const minuteTo = Number(eventDateTo[1])
+
+		const year = Number(eventDateSplit[0])
+		const months = Number(eventDateSplit[1] - 1)
+		const day = Number(eventDateSplit[2])
+
+		const createEventData = {
+			title: formData.title,
+			description: formData.description,
+			dateFrom: new Date(year, months, day, hourFrom, minuteFrom),
+			dateTo: new Date(year, months, day, hourTo, minuteTo),
 		}
+
+		// Pass the form data back to the parent component
+		onEventCreate(createEventData)
 	}
 
 	return (
@@ -65,19 +72,19 @@ const Modal = ({ onClose }) => {
 								onChange={handleChange}
 							/>
 							<input
-								value={formData.startTime}
+								value={formData.dateFrom}
 								type='time'
-								name='startTime'
+								name='dateFrom'
 								className='event-form__field'
 								onChange={handleChange}
 							/>
 							<span>-</span>
 							<input
 								type='time'
-								name='endTime'
+								name='dateTo'
 								className='event-form__field'
 								onChange={handleChange}
-								value={formData.endTime}
+								value={formData.dateTo}
 							/>
 						</div>
 						<textarea
