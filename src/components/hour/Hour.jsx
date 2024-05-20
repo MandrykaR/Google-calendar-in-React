@@ -3,7 +3,7 @@ import React from 'react'
 import Event from '../event/Event.jsx'
 import { formatMins } from '../../../src/utils/dateUtils.js'
 
-const Hour = ({ dataHour, hourEvents }) => {
+const Hour = ({ dataHour, hourEvents, onDeleteEvent }) => {
 	return (
 		<div className='calendar__time-slot' data-time={dataHour + 1}>
 			{hourEvents.map(({ id, dateFrom, dateTo, title }) => {
@@ -17,11 +17,13 @@ const Hour = ({ dataHour, hourEvents }) => {
 				return (
 					<Event
 						key={id}
+						id={id}
 						//calculating event height = duration of event in minutes
 						height={(dateTo.getTime() - dateFrom.getTime()) / (1000 * 60)}
 						marginTop={dateFrom.getMinutes()}
 						time={`${eventStart} - ${eventEnd}`}
 						title={title}
+						onDeleteEvent={onDeleteEvent}
 					/>
 				)
 			})}

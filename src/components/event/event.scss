@@ -1,27 +1,49 @@
 .event {
-  position: absolute;
-  width: 80%;
-  background-color: cornflowerblue;
-  z-index: 1;
-  border-radius: 8px;
-  padding: 8px;
-  color: #fff;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	background-color: cornflowerblue;
+	z-index: 1;
+	border-radius: 8px;
+	padding: 8px;
+	color: #fff;
+	cursor: pointer;
+	&__content {
+		flex-grow: 1;
+	}
 
-  &__title {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-bottom: 8px;
-  }
+	&__title {
+		width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		margin-bottom: 8px;
+	}
 
-  &:hover {
-    font-weight: bold;
-    background-color: red;
-  }
+	&:hover {
+		font-weight: bold;
+		background-color: red;
+	}
 }
 
 .delete-event-btn {
-  cursor: pointer;
-  border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin-top: auto;
+	align-self: flex-end;
+
+	font-size: 17px;
+	cursor: pointer;
+	border-radius: 5px;
+	border: none;
+	padding: 15px 30px;
+	margin-left: 60px;
+	background-color: #fff;
+	box-shadow: -1px 19px 35px -15px rgba(66, 68, 90, 1);
+	&__icon {
+		margin-right: 10px;
+	}
 }

@@ -8,6 +8,7 @@ import { months } from '../src/utils/dateUtils.js'
 
 import './common.scss'
 import axios from 'axios'
+import { _ } from 'core-js'
 
 const baseUrl = 'https://658d94da7c48dce9473970f5.mockapi.io/tasks'
 
@@ -86,6 +87,19 @@ const App = () => {
 		}
 	}
 
+	const handleDelete = async id => {
+		try {
+			const res = await axios.delete(`${baseUrl}/${id}`)
+			if (res.status === 200) {
+				setEvents(prevEvents => prevEvents.filter(event => event.id !== id))
+			} else {
+				console.log(res.status)
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	const weekDates = generateWeekRange(getWeekStartDate(weekStartDate))
 	const startMonth = months[weekDates[0].getMonth()]
 	const endMonth = months[weekDates[weekDates.length - 1].getMonth()]
@@ -101,7 +115,11 @@ const App = () => {
 				navTextMonth={navTextMonth}
 				onOpenModal={handleOpenModal}
 			/>
-			<Calendar weekDates={weekDates} events={events} />
+			<Calendar
+				weekDates={weekDates}
+				events={events}
+				onDeleteEvent={handleDelete}
+			/>
 			{isModalOpen && (
 				<Modal onEventCreate={handleEventCreate} onClose={handleCloseModal} />
 			)}

@@ -43,7 +43,6 @@ const Modal = ({ onEventCreate, onClose }) => {
 			dateTo: new Date(year, months, day, hourTo, minuteTo),
 		}
 
-		// Pass the form data back to the parent component
 		onEventCreate(createEventData)
 	}
 
