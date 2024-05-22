@@ -3,7 +3,12 @@ import Header from './components/header/Header.jsx'
 import Calendar from './components/calendar/Calendar.jsx'
 import Modal from './components/modal/Modal.jsx'
 
-import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js'
+import {
+	getWeekStartDate,
+	generateWeekRange,
+	roundToQuarterHour,
+} from '../src/utils/dateUtils.js'
+
 import { months } from '../src/utils/dateUtils.js'
 
 import './common.scss'
@@ -16,6 +21,11 @@ const App = () => {
 	const [weekStartDate, setWeekStartDate] = useState(new Date())
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [events, setEvents] = useState([])
+	const [initialEventData, setInitialEventData] = useState({
+		data: '',
+		dateFrom: '',
+		dateTo: '',
+	})
 
 	useEffect(() => {
 		getData()
@@ -39,7 +49,16 @@ const App = () => {
 		setWeekStartDate(new Date())
 	}
 
-	const handleOpenModal = () => {
+	const handleOpenModal = (
+		eventData = {
+			data: '',
+			title: '',
+			description: '',
+			dateFrom: '',
+			dateTo: '',
+		}
+	) => {
+		setInitialEventData(eventData)
 		setIsModalOpen(true)
 	}
 
@@ -49,7 +68,16 @@ const App = () => {
 
 	const handleEventCreate = async eventData => {
 		try {
-			const res = await axios.post(baseUrl, eventData)
+			const roundStart = roundToQuarterHour(new Date(eventData.dateFrom))
+			const roundEnd = roundToQuarterHour(new Date(eventData.dateTo))
+
+			const eventToCreate = {
+				...eventData,
+				dateFrom: roundStart,
+				dateTo: roundEnd,
+			}
+
+			const res = await axios.post(baseUrl, eventToCreate)
 			if (res.status === 201) {
 				const eventDataWithDates = {
 					...res.data,
@@ -113,15 +141,20 @@ const App = () => {
 				onNextWeek={handleNextWeek}
 				onCurrentWeek={handleCurrentWeek}
 				navTextMonth={navTextMonth}
-				onOpenModal={handleOpenModal}
+				onOpenModal={() => handleOpenModal}
 			/>
 			<Calendar
 				weekDates={weekDates}
 				events={events}
 				onDeleteEvent={handleDelete}
+				onOpenModal={handleOpenModal}
 			/>
 			{isModalOpen && (
-				<Modal onEventCreate={handleEventCreate} onClose={handleCloseModal} />
+				<Modal
+					onEventCreate={handleEventCreate}
+					onClose={handleCloseModal}
+					initialEventData={initialEventData}
+				/>
 			)}
 		</>
 	)

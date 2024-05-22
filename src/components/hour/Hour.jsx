@@ -3,7 +3,19 @@ import React from 'react'
 import Event from '../event/Event.jsx'
 import { formatMins } from '../../../src/utils/dateUtils.js'
 
-const Hour = ({ dataHour, hourEvents, onDeleteEvent }) => {
+import './hour.scss'
+
+const Hour = ({
+	dataHour,
+	hourEvents,
+	onDeleteEvent,
+	onOpenModal,
+	dataDay,
+}) => {
+	const handleClick = () => {
+		const roundedStart = new Date(dataDay)
+	}
+
 	return (
 		<div className='calendar__time-slot' data-time={dataHour + 1}>
 			{hourEvents.map(({ id, dateFrom, dateTo, title }) => {

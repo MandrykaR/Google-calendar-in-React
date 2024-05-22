@@ -4,11 +4,10 @@ import CurrentTimeIndicator from '../CurrentTimeIndicator/CurrentTimeIndicator.j
 
 import './day.scss'
 
-const Day = ({ dataDay, dayEvents, onDeleteEvent }) => {
+const Day = ({ dataDay, dayEvents, onDeleteEvent, onOpenModal }) => {
 	const hours = Array(24)
 		.fill()
 		.map((val, index) => index)
-
 	return (
 		<div className='calendar__day' data-day={dataDay}>
 			{dataDay === new Date().getDate() && <CurrentTimeIndicator />}
@@ -24,6 +23,7 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent }) => {
 						dataHour={hour}
 						hourEvents={hourEvents}
 						onDeleteEvent={onDeleteEvent}
+						onOpenModal={onOpenModal}
 					/>
 				)
 			})}

@@ -5,7 +5,7 @@ import Sidebar from '../sidebar/Sidebar.jsx'
 
 import './calendar.scss'
 
-const Calendar = ({ weekDates, events, onDeleteEvent }) => {
+const Calendar = ({ weekDates, events, onDeleteEvent, onOpenModal }) => {
 	return (
 		<section className='calendar'>
 			<Navigation weekDates={weekDates} />
@@ -16,6 +16,7 @@ const Calendar = ({ weekDates, events, onDeleteEvent }) => {
 						weekDates={weekDates}
 						events={events}
 						onDeleteEvent={onDeleteEvent}
+						onOpenModal={onOpenModal}
 					/>
 				</div>
 			</div>
