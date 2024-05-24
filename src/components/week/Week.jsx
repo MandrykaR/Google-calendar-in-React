@@ -18,6 +18,7 @@ const Week = ({ weekDates, events, onDeleteEvent, onOpenModal }) => {
 					<Day
 						key={dayStart.getDate()}
 						dataDay={dayStart.getDate()}
+						dayStart={dayStart}
 						dayEvents={dayEvents}
 						onDeleteEvent={onDeleteEvent}
 						onOpenModal={onOpenModal}

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Header from './components/header/Header.jsx'
 import Calendar from './components/calendar/Calendar.jsx'
 import Modal from './components/modal/Modal.jsx'
-
+import axios from 'axios'
+	
 import {
 	getWeekStartDate,
 	generateWeekRange,
@@ -12,8 +13,6 @@ import {
 import { months } from '../src/utils/dateUtils.js'
 
 import './common.scss'
-import axios from 'axios'
-import { _ } from 'core-js'
 
 const baseUrl = 'https://658d94da7c48dce9473970f5.mockapi.io/tasks'
 
@@ -141,7 +140,7 @@ const App = () => {
 				onNextWeek={handleNextWeek}
 				onCurrentWeek={handleCurrentWeek}
 				navTextMonth={navTextMonth}
-				onOpenModal={() => handleOpenModal}
+				onOpenModal={handleOpenModal}
 			/>
 			<Calendar
 				weekDates={weekDates}

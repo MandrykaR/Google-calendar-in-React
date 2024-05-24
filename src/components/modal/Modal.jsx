@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './modal.scss'
 import { roundToQuarterHour } from '../../utils/dateUtils'
 
-const Modal = ({ onEventCreate, onClose }) => {
+const Modal = ({ onEventCreate, onClose, initialEventData }) => {
 	const [formData, setFormData] = useState({
 		title: '',
 		description: '',
@@ -13,22 +13,26 @@ const Modal = ({ onEventCreate, onClose }) => {
 	})
 
 	useEffect(() => {
-		const now = new Date()
-		const roundedStart = roundToQuarterHour(new Date(now))
-		const roundedEnd = new Date(roundedStart.getTime() + 15 * 60 * 1000)
+		if (initialEventData && initialEventData.date) {
+			setFormData(initialEventData)
+		} else {
+			const now = new Date()
+			const roundedStart = roundToQuarterHour(new Date(now))
+			const roundedEnd = new Date(roundedStart.getTime() + 15 * 60 * 1000)
 
-		const formattedDate = roundedStart.toISOString().slice(0, 10)
-		const formattedStartTime = roundedStart.toTimeString().slice(0, 5)
-		const formattedEndTime = roundedEnd.toTimeString().slice(0, 5)
+			const formattedDate = roundedStart.toISOString().slice(0, 10)
+			const formattedStartTime = roundedStart.toTimeString().slice(0, 5)
+			const formattedEndTime = roundedEnd.toTimeString().slice(0, 5)
 
-		setFormData({
-			title: '',
-			description: '',
-			date: formattedDate,
-			dateFrom: formattedStartTime,
-			dateTo: formattedEndTime,
-		})
-	},[])
+			setFormData({
+				title: '',
+				description: '',
+				date: formattedDate,
+				dateFrom: formattedStartTime,
+				dateTo: formattedEndTime,
+			})
+		}
+	}, [initialEventData])
 
 	const handleChange = e => {
 		const { name, value } = e.target

@@ -13,11 +13,27 @@ const Hour = ({
 	dataDay,
 }) => {
 	const handleClick = () => {
-		const roundedStart = new Date(dataDay)
+		const date = new Date(dataDay)
+		date.setHours(dataHour, 0, 0, 0)
+		const dateFrom = date.toISOString().slice(0, 16)
+		date.setHours(dataHour + 1, 0, 0, 0)
+		const dateTo = date.toISOString().slice(0, 16)
+
+		onOpenModal({
+			title: '',
+			description: '',
+			date: dateFrom.slice(0, 10),
+			dateFrom: dateFrom.slice(11),
+			dateTo: dateTo.slice(11),
+		})
 	}
 
 	return (
-		<div className='calendar__time-slot' data-time={dataHour + 1}>
+		<div
+			className='calendar__time-slot'
+			data-time={dataHour + 1}
+			onClick={handleClick}
+		>
 			{hourEvents.map(({ id, dateFrom, dateTo, title }) => {
 				const eventStart = `${dateFrom.getHours()}:${formatMins(
 					dateFrom.getMinutes()
