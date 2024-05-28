@@ -16,7 +16,7 @@ const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
 	}
 
 	return (
-		<div style={eventStyle} className='event ' onClick={toggleButtonVisibility}>
+		<div style={eventStyle} className='event' onClick={toggleButtonVisibility}>
 			<div className='event__content'>
 				<div className='event__title'>{title}</div>
 				<div className='event__time'>{time}</div>
