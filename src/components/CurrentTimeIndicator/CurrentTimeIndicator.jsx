@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import './currentTimeIndicator.scss'
+
+import './CurrentTimeIndicator.scss'
 
 const CurrentTimeIndicator = () => {
 	const [topOffset, setTopOffset] = useState(0)
