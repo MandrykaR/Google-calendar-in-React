@@ -11,7 +11,8 @@ const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
 		marginTop,
 	}
 
-	const toggleButtonVisibility = () => {
+	const toggleButtonVisibility = e => {
+		e.stopPropagation()
 		setButtonVisible(!isButtonVisible)
 	}
 

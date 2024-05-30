@@ -3,7 +3,7 @@ import Header from './components/header/Header.jsx'
 import Calendar from './components/calendar/Calendar.jsx'
 import Modal from './components/modal/Modal.jsx'
 import axios from 'axios'
-	
+
 import {
 	getWeekStartDate,
 	generateWeekRange,
@@ -66,6 +66,31 @@ const App = () => {
 	}
 
 	const handleEventCreate = async eventData => {
+		const startDateTime = new Date(`${eventData.data}${eventData.dateFrom}`)
+		const endDateTime = new Date(`${eventData.data}${eventData.dateTo}`)
+
+		if (startDateTime >= endDateTime) {
+			alert('End time must be after start time.')
+			return
+		}
+
+		const eventDuration = (endDateTime - startDateTime) / (1000 * 60 * 60)
+		if (eventDuration > 6) {
+			alert('Event duration cannot be longer than 6 hours.')
+			return
+		}
+
+		const isOverlap = events.some(event => {
+			const existingStart = new Date(event.dateFrom)
+			const existingEnd = new Date(event.dateTo)
+			return startDateTime < existingEnd && endDateTime > existingStart
+		})
+
+		if (isOverlap) {
+			alert('Event time overlaps with an existing event.')
+			return
+		}
+
 		try {
 			const roundStart = roundToQuarterHour(new Date(eventData.dateFrom))
 			const roundEnd = roundToQuarterHour(new Date(eventData.dateTo))
@@ -116,6 +141,11 @@ const App = () => {
 
 	const handleDelete = async id => {
 		try {
+			const now = new Date()
+
+			const eventToDelete = events.find(event => event.id === id);
+			
+
 			const res = await axios.delete(`${baseUrl}/${id}`)
 			if (res.status === 200) {
 				setEvents(prevEvents => prevEvents.filter(event => event.id !== id))
