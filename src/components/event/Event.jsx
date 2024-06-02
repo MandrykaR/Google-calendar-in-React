@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import PropTypes from 'prop-types'
 
 import './event.scss'
+import { height } from '@fortawesome/free-solid-svg-icons/fa0'
 
 const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
 	const [isButtonVisible, setButtonVisible] = useState(false)
@@ -36,6 +38,15 @@ const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
 			)}
 		</div>
 	)
+}
+
+Event.propTypes = {
+	id: PropTypes.string.isRequired,
+	height: PropTypes.number.isRequired,
+	marginTop: PropTypes.number.isRequired,
+	title: PropTypes.string.isRequired,
+	time: PropTypes.string.isRequired,
+	onDeleteEvent: PropTypes.func.isRequired,
 }
 
 export default Event

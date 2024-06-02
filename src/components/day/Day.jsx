@@ -1,6 +1,7 @@
 import React from 'react'
 import Hour from '../hour/Hour'
 import CurrentTimeIndicator from '../CurrentTimeIndicator/CurrentTimeIndicator.jsx'
+import PropTypes from 'prop-types'
 
 import './day.scss'
 
@@ -12,11 +13,9 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent, onOpenModal, dayStart }) => {
 		<div className='calendar__day' data-day={dataDay}>
 			{dataDay === new Date().getDate() && <CurrentTimeIndicator />}
 			{hours.map(hour => {
-				//getting all events from the day we will render
 				const hourEvents = dayEvents.filter(
 					event => event.dateFrom.getHours() === hour
 				)
-
 				return (
 					<Hour
 						key={dataDay + hour}
@@ -30,6 +29,21 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent, onOpenModal, dayStart }) => {
 			})}
 		</div>
 	)
+}
+
+Day.propTypes = {
+	dataDay: PropTypes.number.isRequired,
+	dayStart: PropTypes.instanceOf(Date).isRequired,
+	dayEvents: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			title: PropTypes.string.isRequired,
+			dateFrom: PropTypes.instanceOf(Date).isRequired,
+			dateTo: PropTypes.instanceOf(Date).isRequired,
+		})
+	).isRequired,
+	onDeleteEvent: PropTypes.func.isRequired,
+	onOpenModal: PropTypes.func.isRequired,
 }
 
 export default Day

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './navigation.scss'
 
 import { days } from '../../utils/dateUtils.js'
@@ -30,5 +31,11 @@ const isCurrentDay = date => {
 		date.getFullYear() === currentDate.getFullYear()
 	)
 }
+
+Navigation.propTypes = {
+	weekDates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+}
+
+
 
 export default Navigation

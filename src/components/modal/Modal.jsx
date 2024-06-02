@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import './modal.scss'
 import { roundToQuarterHour } from '../../utils/dateUtils'
@@ -124,6 +125,16 @@ const Modal = ({ onEventCreate, onClose, initialEventData }) => {
 			</div>
 		</div>
 	)
+}
+
+Modal.propTypes = {
+	onEventCreate: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
+	initialEventData: PropTypes.shape({
+		date: PropTypes.string.isRequired,
+		dateFrom: PropTypes.string.isRequired,
+		dateTo: PropTypes.string.isRequired,
+	}).isRequired,
 }
 
 export default Modal

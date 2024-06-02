@@ -1,7 +1,7 @@
 import React from 'react'
-
 import Event from '../event/Event.jsx'
 import { formatMins } from '../../../src/utils/dateUtils.js'
+import PropTypes from 'prop-types'
 
 import './hour.scss'
 
@@ -15,16 +15,18 @@ const Hour = ({
 	const handleClick = () => {
 		const date = new Date(dataDay)
 		date.setHours(dataHour, 0, 0, 0)
-		const dateFrom = date.toISOString().slice(0, 16)
-		date.setHours(dataHour + 1, 0, 0, 0)
-		const dateTo = date.toISOString().slice(0, 16)
+
+		const dateFrom = new Date(date)
+		const dateTo = new Date(date)
+
+		dateTo.setHours(dataHour + 1)
 
 		onOpenModal({
 			title: '',
 			description: '',
-			date: dateFrom.slice(0, 10),
-			dateFrom: dateFrom.slice(11),
-			dateTo: dateTo.slice(11),
+			date: dateFrom.toISOString().slice(0, 10),
+			dateFrom: dateFrom.toTimeString().slice(0, 5),
+			dateTo: dateTo.toTimeString().slice(0, 5),
 		})
 	}
 
@@ -46,7 +48,7 @@ const Hour = ({
 					<Event
 						key={id}
 						id={id}
-						//calculating event height = duration of event in minutes
+						// calculating event height = duration of event in minutes
 						height={(dateTo.getTime() - dateFrom.getTime()) / (1000 * 60)}
 						marginTop={dateFrom.getMinutes()}
 						time={`${eventStart} - ${eventEnd}`}
@@ -57,6 +59,21 @@ const Hour = ({
 			})}
 		</div>
 	)
+}
+
+Hour.propTypes = {
+	dataHour: PropTypes.number.isRequired,
+	hourEvents: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			title: PropTypes.string.isRequired,
+			dateFrom: PropTypes.instanceOf(Date).isRequired,
+			dateTo: PropTypes.instanceOf(Date).isRequired,
+		})
+	).isRequired,
+	dataDay: PropTypes.instanceOf(Date).isRequired,
+	onDeleteEvent: PropTypes.func.isRequired,
+	onOpenModal: PropTypes.func.isRequired,
 }
 
 export default Hour
