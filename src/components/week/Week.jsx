@@ -11,7 +11,6 @@ const Week = ({ weekDates, events, onDeleteEvent, onOpenModal }) => {
 				const dayEnd = new Date(dayStart.getTime()).setHours(
 					dayStart.getHours() + 24
 				)
-				//getting all events from the day we will render
 				const dayEvents = events.filter(event => {
 					return event.dateFrom > dayStart && event.dateTo < dayEnd
 				})
