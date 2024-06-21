@@ -1,5 +1,5 @@
 # Calendar in React
-### [Site link] https://main--google-calendaar.netlify.app/
+### [Site link]https://main--google-calendaar.netlify.app/
 
 ### The tech stack is:
 - [HTML5](https://en.wikipedia.org/wiki/HTML5)
