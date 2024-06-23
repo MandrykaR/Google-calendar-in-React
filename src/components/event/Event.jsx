@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
+
 import './event.scss';
 
 const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
@@ -46,3 +47,5 @@ Event.propTypes = {
   time: PropTypes.string.isRequired,
   onDeleteEvent: PropTypes.func.isRequired,
 };
+
+export default Event;
