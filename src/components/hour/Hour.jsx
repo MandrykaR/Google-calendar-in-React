@@ -44,6 +44,7 @@ const Hour = ({
           dateTo.getMinutes()
         )}`;
 
+<<<<<<< HEAD
         return (
           <Event
             key={id}
@@ -60,6 +61,23 @@ const Hour = ({
     </div>
   );
 };
+=======
+				return (
+					<Event
+						key={id}
+						id={id}
+						height={(dateTo.getTime() - dateFrom.getTime()) / (1000 * 60)}
+						marginTop={dateFrom.getMinutes()}
+						time={`${eventStart} - ${eventEnd}`}
+						title={title}
+						onDeleteEvent={onDeleteEvent}
+					/>
+				)
+			})}
+		</div>
+	)
+}
+>>>>>>> ad3ea296cd6a7a6be660667ffbd2abd9beb5d335
 
 Hour.propTypes = {
   dataHour: PropTypes.number.isRequired,
