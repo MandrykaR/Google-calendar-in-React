@@ -1,44 +1,44 @@
 .event {
-	position: absolute;
-	width: 80%;
-	background-color: cornflowerblue;
-	z-index: 1;
-	border-radius: 8px;
-	padding: 8px;
-	color: #fff;
+  position: absolute;
+  width: 80%;
+  background-color: cornflowerblue;
+  z-index: 1;
+  border-radius: 8px;
+  padding: 8px;
+  color: #fff;
 
-	&__title {
-		width: 100%;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-		margin-bottom: 8px;
-	}
+  &__title {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 8px;
+  }
 
-	&:hover {
-		font-weight: bold;
-		background-color: red;
-	}
+  &:hover {
+    font-weight: bold;
+    background-color: red;
+  }
 }
 
 .delete-event-btn {
-	cursor: pointer;
-	border: none;
-	background: none;
-	display: flex;
-	align-items: center;
-	padding: 8px;
-	font-size: 14px;
-	color: #000;
-	background-color: #fff;
-	border-radius: 4px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-size: 14px;
+  color: #000;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-	&__icon {
-		margin-right: 4px;
-	}
+  &__icon {
+    margin-right: 4px;
+  }
 
-	&:hover {
-		background-color: #f0f0f0;
-	}
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
