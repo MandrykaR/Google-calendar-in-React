@@ -10,9 +10,6 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent, onOpenModal, dayStart }) => {
     .fill()
     .map((val, index) => index);
 
-  const today = new Date();
-  const isToday = today.toDateString() === dayStart.toDateString();
-
   return (
     <div className="calendar__day" data-day={dataDay}>
       {isToday && <CurrentTimeIndicator isToday={isToday} />}
