@@ -1,10 +1,6 @@
 # Calendar in React
-<<<<<<< HEAD
 
-### [Site link] https://main--google-calendaar.netlify.app/
-=======
-### [Site link]https://main--google-calendaar.netlify.app/
->>>>>>> ad3ea296cd6a7a6be660667ffbd2abd9beb5d335
+### Site link https://main--google-calendaar.netlify.app/
 
 ### The tech stack is:
 
@@ -19,8 +15,7 @@
 - [Webpack](https://webpack.js.org/)
 - [Babel](https://babeljs.io/)
 
-<<<<<<< HEAD
-=======
+
 ### Development Setup
 
 | **Step**                                **Command**
@@ -30,7 +25,6 @@
 
 | **Start the development server:**       `npm start`
 
->>>>>>> ad3ea296cd6a7a6be660667ffbd2abd9beb5d335
 ### Author
 
 - Mandryka Roman
