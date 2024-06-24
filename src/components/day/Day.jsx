@@ -9,9 +9,13 @@ const Day = ({ dataDay, dayEvents, onDeleteEvent, onOpenModal, dayStart }) => {
   const hours = Array(24)
     .fill()
     .map((val, index) => index);
+
+  const today = new Date();
+  const isToday = today.toDateString() === dayStart.toDateString();
+
   return (
     <div className="calendar__day" data-day={dataDay}>
-      {dataDay === new Date().getDate() && <CurrentTimeIndicator />}
+      {isToday && <CurrentTimeIndicator isToday={isToday} />}
       {hours.map((hour) => {
         const hourEvents = dayEvents.filter(
           (event) => event.dateFrom.getHours() === hour

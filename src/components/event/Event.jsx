@@ -5,7 +5,15 @@ import PropTypes from 'prop-types';
 
 import './event.scss';
 
-const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
+const Event = ({
+  id,
+  height,
+  marginTop,
+  title,
+  time,
+  onDeleteEvent,
+  description,
+}) => {
   const [isButtonVisible, setButtonVisible] = useState(false);
   const eventStyle = {
     height,
@@ -22,6 +30,7 @@ const Event = ({ id, height, marginTop, title, time, onDeleteEvent }) => {
       <div className="event__content">
         <div className="event__title">{title}</div>
         <div className="event__time">{time}</div>
+        <div className="event__desc">{description}</div>
       </div>
       {isButtonVisible && (
         <button

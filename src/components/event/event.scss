@@ -6,10 +6,40 @@
   border-radius: 8px;
   padding: 8px;
   color: #fff;
+  box-sizing: border-box;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  &__desc {
+    font-size: 0.9em;
+    color: #ffffff;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow: auto;
+  }
+
+  &__desc::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &__desc::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+
+  &__desc::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
 
   &__title {
     width: 100%;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-bottom: 8px;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
 import './CurrentTimeIndicator.scss';
 
-const CurrentTimeIndicator = () => {
+const CurrentTimeIndicator = ({ isToday }) => {
   const [topOffset, setTopOffset] = useState(0);
 
   const updateTopOffset = () => {
@@ -12,10 +11,16 @@ const CurrentTimeIndicator = () => {
   };
 
   useEffect(() => {
-    updateTopOffset();
-    const intervalId = setInterval(updateTopOffset, 60000);
-    return () => clearInterval(intervalId);
-  }, []);
+    if (isToday) {
+      updateTopOffset();
+      const intervalId = setInterval(updateTopOffset, 60000);
+      return () => clearInterval(intervalId);
+    }
+  }, [isToday]);
+
+  if (!isToday) {
+    return null;
+  }
 
   return (
     <div className="current-time-indicator" style={{ top: `${topOffset}%` }} />

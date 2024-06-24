@@ -8,15 +8,16 @@ const Week = ({ weekDates, events, onDeleteEvent, onOpenModal }) => {
   return (
     <div className="calendar__week">
       {weekDates.map((dayStart) => {
-        const dayEnd = new Date(dayStart.getTime()).setHours(
-          dayStart.getHours() + 24
-        );
+        const dayEnd = new Date(dayStart);
+        dayEnd.setHours(23, 59, 59, 999);
+
         const dayEvents = events.filter((event) => {
-          return event.dateFrom > dayStart && event.dateTo < dayEnd;
+          return event.dateFrom >= dayStart && event.dateFrom <= dayEnd;
         });
+
         return (
           <Day
-            key={dayStart.getDate()}
+            key={dayStart.toISOString()}
             dataDay={dayStart.getDate()}
             dayStart={dayStart}
             dayEvents={dayEvents}
