@@ -1,21 +1,19 @@
 import React from 'react';
 import Hour from '../hour/Hour';
 import CurrentTimeIndicator from '../CurrentTimeIndicator/CurrentTimeIndicator.jsx';
+import { isToday } from '../../utils/dateUtils';
 import PropTypes from 'prop-types';
-
-import './day.scss';
 
 const Day = ({ dataDay, dayEvents, onDeleteEvent, onOpenModal, dayStart }) => {
   const hours = Array(24)
     .fill()
-    .map((val, index) => index);
+    .map((_, index) => index);
 
-  const today = new Date();
-  const isToday = today.toDateString() === dayStart.toDateString();
+  const todayCheck = isToday(dayStart);
 
   return (
     <div className="calendar__day" data-day={dataDay}>
-      {isToday && <CurrentTimeIndicator isToday={isToday} />}
+      {todayCheck && <CurrentTimeIndicator isToday={todayCheck} />}
       {hours.map((hour) => {
         const hourEvents = dayEvents.filter(
           (event) => event.dateFrom.getHours() === hour

@@ -9,7 +9,14 @@ export const getWeekStartDate = (date) => {
   const monday = new Date(dateCopy.setDate(date.getDate() + difference));
   return new Date(monday.getFullYear(), monday.getMonth(), monday.getDate());
 };
-
+export const isToday = (date) => {
+  const today = new Date();
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+};
 export const roundToQuarterHour = (date) => {
   const minutes = date.getMinutes();
   const roundedMinutes = Math.ceil(minutes / 15) * 15;
