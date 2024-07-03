@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import Header from './components/header/Header.jsx';
 import Calendar from './components/calendar/Calendar.jsx';
 import Modal from './components/modal/Modal.jsx';
-import {
-  getWeekNavigationText,
-  getNextWeek,
-  getPrevWeek,
-} from './utils/weekUtils.js';
 import { generateWeekRange, getWeekStartDate } from './utils/dateUtils.js';
 import useModal from './hooks/useModal';
 import useEvents from './hooks/useEvents';
@@ -17,33 +12,17 @@ const App = () => {
   const { isModalOpen, eventData, openModal, closeModal } = useModal();
   const { events, addEvent, removeEvent } = useEvents();
 
-  const handlePrevWeek = () => {
-    setWeekStartDate(getPrevWeek);
-  };
-
-  const handleNextWeek = () => {
-    setWeekStartDate(getNextWeek);
-  };
-
-  const handleCurrentWeek = () => {
-    setWeekStartDate(new Date());
-  };
-
   const handleEventCreate = async (eventData) => {
     await addEvent(eventData);
     closeModal();
   };
 
-  const navTextMonth = getWeekNavigationText(weekStartDate);
-
   return (
     <>
       <Header
-        onPrevWeek={handlePrevWeek}
-        onNextWeek={handleNextWeek}
-        onCurrentWeek={handleCurrentWeek}
-        navTextMonth={navTextMonth}
         onOpenModal={openModal}
+        weekStartDate={weekStartDate}
+        setWeekStartDate={setWeekStartDate}
       />
       <Calendar
         weekDates={generateWeekRange(getWeekStartDate(weekStartDate))}

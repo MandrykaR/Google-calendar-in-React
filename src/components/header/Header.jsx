@@ -1,15 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import {
+  getNextWeek,
+  getPrevWeek,
+  getWeekNavigationText,
+} from '../../utils/weekUtils';
 import './header.scss';
 
-const Header = ({
-  onPrevWeek,
-  onNextWeek,
-  onCurrentWeek,
-  onOpenModal,
-  navTextMonth,
-}) => {
+const Header = ({ onOpenModal, weekStartDate, setWeekStartDate }) => {
+  const handlePrevWeek = () => {
+    setWeekStartDate(getPrevWeek(weekStartDate));
+  };
+
+  const handleNextWeek = () => {
+    setWeekStartDate(getNextWeek(weekStartDate));
+  };
+
+  const handleCurrentWeek = () => {
+    setWeekStartDate(new Date());
+  };
+
+  const navTextMonth = getWeekNavigationText(weekStartDate);
+
   return (
     <header className="header">
       <button className="button create-event-btn" onClick={onOpenModal}>
@@ -18,15 +30,21 @@ const Header = ({
       <div className="navigation">
         <button
           className="navigation__today-btn button"
-          onClick={onCurrentWeek}
+          onClick={handleCurrentWeek}
         >
           Today
         </button>
-        <button className="icon-button navigation__nav-icon">
-          <i className="fas fa-chevron-left" onClick={onPrevWeek}></i>
+        <button
+          className="icon-button navigation__nav-icon"
+          onClick={handlePrevWeek}
+        >
+          <i className="fas fa-chevron-left"></i>
         </button>
-        <button className="icon-button navigation__nav-icon">
-          <i className="fas fa-chevron-right" onClick={onNextWeek}></i>
+        <button
+          className="icon-button navigation__nav-icon"
+          onClick={handleNextWeek}
+        >
+          <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month">{navTextMonth}</span>
       </div>
@@ -35,11 +53,9 @@ const Header = ({
 };
 
 Header.propTypes = {
-  onPrevWeek: PropTypes.func.isRequired,
-  onNextWeek: PropTypes.func.isRequired,
-  onCurrentWeek: PropTypes.func.isRequired,
   onOpenModal: PropTypes.func.isRequired,
-  navTextMonth: PropTypes.string.isRequired,
+  weekStartDate: PropTypes.instanceOf(Date).isRequired,
+  setWeekStartDate: PropTypes.func.isRequired,
 };
 
 export default Header;

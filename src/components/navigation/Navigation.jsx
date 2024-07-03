@@ -5,6 +5,14 @@ import './navigation.scss';
 import { days } from '../../utils/dateUtils.js';
 
 const Navigation = ({ weekDates }) => {
+  const isCurrentDay = (date) => {
+    const currentDate = new Date();
+    return (
+      date.getDate() === currentDate.getDate() &&
+      date.getMonth() === currentDate.getMonth() &&
+      date.getFullYear() === currentDate.getFullYear()
+    );
+  };
   return (
     <header className="calendar__header">
       {weekDates.map((dayDate) => (
@@ -20,15 +28,6 @@ const Navigation = ({ weekDates }) => {
         </div>
       ))}
     </header>
-  );
-};
-
-const isCurrentDay = (date) => {
-  const currentDate = new Date();
-  return (
-    date.getDate() === currentDate.getDate() &&
-    date.getMonth() === currentDate.getMonth() &&
-    date.getFullYear() === currentDate.getFullYear()
   );
 };
 
